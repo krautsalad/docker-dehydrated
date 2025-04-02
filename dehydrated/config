@@ -2,9 +2,12 @@ BASEDIR="/var/lib/dehydrated"
 CONTACT_EMAIL=
 
 ACCOUNTDIR="${BASEDIR}/data/accounts"
+AUTO_CLEANUP="yes"
 CERTDIR="${BASEDIR}/data/certs"
 CHAINCACHE="${BASEDIR}/data/chains"
 DOMAINS_TXT="${BASEDIR}/config/domains.txt"
 HOOK="${BASEDIR}/config/hook.sh"
 LOCKFILE="${BASEDIR}/data/lock"
+OCSP_FETCH="yes"
+OCSP_MUST_STAPLE="yes"
 WELLKNOWN="${BASEDIR}/acme-challenge"

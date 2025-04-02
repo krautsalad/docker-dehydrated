@@ -94,12 +94,21 @@ deploy_cert() {
   cp -f "$CHAINFILE" "$SSLDIR/$DOMAIN.ca"
   cat "$KEYFILE" "$FULLCHAINFILE" > "$SSLDIR/$DOMAIN.pem.key"
 
-  chmod go+r "$SSLDIR/$DOMAIN.ca" "$SSLDIR/$DOMAIN.crt" "$SSLDIR/$DOMAIN.pem" 
+  chmod go+r "$SSLDIR/$DOMAIN.ca" "$SSLDIR/$DOMAIN.crt" "$SSLDIR/$DOMAIN.pem"
+  chroot /host docker exec nginx /usr/sbin/nginx -s reload
+}
+
+deploy_ocsp() {
+  local DOMAIN="${1}" OCSPFILE="${2}" TIMESTAMP="${3}"
+
+  cp -f "$OCSPFILE" "$SSLDIR/$DOMAIN.oscp.der"
+
+  chmod go+r "$SSLDIR/$DOMAIN.oscp.der"
   chroot /host docker exec nginx /usr/sbin/nginx -s reload
 }
 
 HANDLER="$1"; shift
-if [[ "${HANDLER}" =~ ^(deploy_cert)$ ]]; then
+if [[ "${HANDLER}" =~ ^(deploy_cert|deploy_ocsp)$ ]]; then
   "$HANDLER" "$@"
 fi
 ```
