@@ -8,7 +8,7 @@ Cron-Managed Certificate Renewal with Dehydrated.
 
 ### Docker Compose Example
 
-```yaml
+```yml
 # docker-compose.yml
 services:
   dehydrated:
