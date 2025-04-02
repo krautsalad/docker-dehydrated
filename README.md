@@ -101,9 +101,9 @@ deploy_cert() {
 deploy_ocsp() {
   local DOMAIN="${1}" OCSPFILE="${2}" TIMESTAMP="${3}"
 
-  cp -f "$OCSPFILE" "$SSLDIR/$DOMAIN.oscp.der"
+  cp -f "$OCSPFILE" "$SSLDIR/$DOMAIN.ocsp.der"
 
-  chmod go+r "$SSLDIR/$DOMAIN.oscp.der"
+  chmod go+r "$SSLDIR/$DOMAIN.ocsp.der"
   chroot /host docker exec nginx /usr/sbin/nginx -s reload
 }
 
