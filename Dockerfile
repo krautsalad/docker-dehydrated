@@ -1,7 +1,7 @@
 FROM alpine
 
 RUN apk update && \
-    apk add --no-cache bash busybox-suid curl openssl tzdata && \
+    apk add --no-cache bash busybox-suid curl openssh-client-default openssl tzdata && \
     apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing dehydrated && \
     rm -rf /etc/dehydrated /root/.cache /tmp/* /var/cache/apk/* /var/tmp/*
 
