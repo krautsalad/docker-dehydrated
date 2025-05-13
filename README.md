@@ -98,17 +98,8 @@ deploy_cert() {
   chroot /host docker exec nginx /usr/sbin/nginx -s reload
 }
 
-deploy_ocsp() {
-  local DOMAIN="${1}" OCSPFILE="${2}" TIMESTAMP="${3}"
-
-  cp -f "$OCSPFILE" "$SSLDIR/$DOMAIN.ocsp.der"
-
-  chmod go+r "$SSLDIR/$DOMAIN.ocsp.der"
-  chroot /host docker exec nginx /usr/sbin/nginx -s reload
-}
-
 HANDLER="$1"; shift
-if [[ "${HANDLER}" =~ ^(deploy_cert|deploy_ocsp)$ ]]; then
+if [[ "${HANDLER}" =~ ^(deploy_cert)$ ]]; then
   "$HANDLER" "$@"
 fi
 ```
