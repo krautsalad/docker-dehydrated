@@ -1,10 +1,10 @@
 FROM alpine AS build
 
-ENV VERSION=0.7.2
+ARG DEHYDRATED_VERSION
 
-RUN wget -q https://github.com/dehydrated-io/dehydrated/releases/download/v${VERSION}/dehydrated-${VERSION}.tar.gz && \
+RUN wget -q https://github.com/dehydrated-io/dehydrated/releases/download/v${DEHYDRATED_VERSION}/dehydrated-${DEHYDRATED_VERSION}.tar.gz && \
     mkdir -p /dehydrated && \
-    tar -xzf dehydrated-${VERSION}.tar.gz --strip-components=1 -C /dehydrated
+    tar -xzf dehydrated-${DEHYDRATED_VERSION}.tar.gz --strip-components=1 -C /dehydrated
 
 FROM alpine
 
