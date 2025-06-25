@@ -1,9 +1,10 @@
 FROM alpine AS build
 
-RUN apk update && \
-    apk add --no-cache git
+ENV VERSION=0.7.2
 
-RUN git clone --depth 1 https://github.com/dehydrated-io/dehydrated.git /dehydrated
+RUN wget -q https://github.com/dehydrated-io/dehydrated/releases/download/v${VERSION}/dehydrated-${VERSION}.tar.gz && \
+    mkdir -p /dehydrated && \
+    tar -xzf dehydrated-${VERSION}.tar.gz --strip-components=1 -C /dehydrated
 
 FROM alpine
 
@@ -19,7 +20,7 @@ EOF
 
 COPY --from=build /dehydrated/dehydrated /usr/bin/dehydrated
 COPY dehydrated/config /etc/dehydrated/config
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["crond", "-f"]
