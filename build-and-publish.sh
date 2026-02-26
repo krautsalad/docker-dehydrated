@@ -26,5 +26,5 @@ until docker buildx build \
     -t krautsalad/dehydrated:latest \
     -t krautsalad/dehydrated:${VERSION} \
     "${BUILD_CONTEXT}"; do
-    echo "Retrying push for ${image}-dev…" ; sleep 2
+    echo "Retrying push for krautsalad/dehydrated…" ; sleep 2
 done
